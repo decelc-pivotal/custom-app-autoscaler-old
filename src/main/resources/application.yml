@@ -1,0 +1,39 @@
+spring:
+  application: 
+    name: autoscaler
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: false
+  mail:
+    host: smtp.live.com
+    port: 25
+    username: username
+    password: password
+    properties:
+      mail:
+        smtp:
+          starttls:
+            enabled: true
+            required: true
+    
+server:
+  port: 8882
+  
+logging:
+  level: 
+    root: INFO
+  
+---
+
+spring:
+  profiles: default
+  jpa:
+    database: HSQL
+    
+---
+
+spring:
+  profiles: cloud
+  jpa:
+    database: MYSQL
