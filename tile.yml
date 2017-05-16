@@ -1,0 +1,34 @@
+---
+#
+# Custom App Autoscaler Tile
+#
+name: custom-app-autoscaler 
+icon_file: resources/custom_autoscaler_icon.png
+label: Custom App Autoscaler
+description: Custom App Autoscaler based on custom metrics.
+
+# Global defaults (all optional)
+#
+org: p-scaling-org                         # Name of org to create for your apps
+org_quota: 4096                       # Memory quota for that org in MB
+space: p-scaling-space                     # Name of space to create for your apps
+apply_open_security_group: true         # Apply open security group, default: false
+
+# Specify the packages to be included in your tile.
+# The format of the section to include depends on the type
+# of package you are describing. For fragments of each type
+# that you can copy & paste, see:
+#
+# https://github.com/cf-platform-eng/tile-generator/blob/master/README.md
+#
+packages:
+- name: custom-app-autoscaler
+  type: app-broker
+  label: Custom App Autoscaler
+  manifest:
+    path: resources/custom-app-autoscaler-0.0.1-SNAPSHOT.jar
+  needs_cf_credentials: true
+  auto_services:
+  - name: p-mysql
+    plan: 100mb
+  enable_global_access_to_plans: true
